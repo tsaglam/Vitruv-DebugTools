@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Vitruv Debug Tools
+Bundle-SymbolicName: tools.vitruv.framework.debug
+Automatic-Module-Name: tools.vitruv.framework.debug
+Bundle-Version: 0.3.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.apache.log4j,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ tools.vitruv.domains.java.echange
+Export-Package: 
+ tools.vitruv.framework.change.recording
+Bundle-Vendor: vitruv.tools
