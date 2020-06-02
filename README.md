@@ -1,4 +1,4 @@
-# Vitruv-DebugTools
+# Vitruv Debugging Tools
 Tools for debugging the change propagation when using the Vitruv framework.
 
 ### The Change Origin Tracker
@@ -42,3 +42,5 @@ ChangeSequence by PCM --> JAVA [
         mir.reactions.pcm2javaCommon.CreatedProvidedRoleReaction.executeReaction(CreatedProvidedRoleReaction.java:40)
 ]
 ```
+
+When using `autoPrintNewChanges = true` I often need to separate the change origin tracker output from other log output. This can be done with the a regex like this one: `(?s)ChangeSequence by(.*?) \[(.*?)\n\]`
