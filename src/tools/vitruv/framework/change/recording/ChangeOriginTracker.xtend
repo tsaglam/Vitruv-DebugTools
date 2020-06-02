@@ -7,9 +7,8 @@ import org.eclipse.xtend.lib.annotations.Data
 import tools.vitruv.framework.change.echange.EChange
 
 /**
- * Lightweight utility class with state that can be used to track certain changes
- * and document which reactions are responsible for them.
- * Exploits exceptions to access the stack trace.
+ * Lightweight utility class that can be used to track certain changes
+ * statically and document which reactions are responsible for them.
  */
 class ChangeOriginTracker {
     static val String CORRESPONDENCE = "Correspondence"
@@ -25,7 +24,7 @@ class ChangeOriginTracker {
      */
     def static report(Iterable<EChange> changes) {
         if (trackingEnabled) {
-            val reactionsStackTrace = new Exception().stackTrace.filter [ // TODO maybe use Thread.currentThread.stackTrace
+            val reactionsStackTrace = Thread.currentThread.stackTrace.filter [
                 toString.contains(MIR) && !toString.contains(DOLLAR) && !toString.contains(FACADE)
             ]
             val topic = TransformationType.values.findFirst[reactionsStackTrace.toString.contains(it.getIndicator)]
@@ -36,7 +35,7 @@ class ChangeOriginTracker {
     }
 
     /**
-     * Convinience method to clear all changes, enable tracking and auto-printing.
+     * Convenience method to clear all changes, enable tracking and auto-printing.
      * @see ChangeOriginTracker#clear()
      */
     def static enable() {
@@ -59,6 +58,9 @@ class ChangeOriginTracker {
         trackedChangeSequences.forEach[System.err.println(it)]
     }
 
+    /**
+     * Prints the latest change sequence that has been reported.
+     */
     def static printLatest() {
         if (!trackedChangeSequences.empty) {
             System.err.println(trackedChangeSequences.last)
